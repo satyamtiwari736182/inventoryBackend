@@ -1,0 +1,41 @@
+Entity:
+    Product
+        - id ***
+        - name
+        - price
+        - category {enum}
+        - quantity
+    Transaction
+        - id
+        - name[]
+        - price[]
+        - quantity[]
+        - category (enum){sale, purchase}
+
+Product Services: 
+    1. get product by name => service
+
+end-points base url:
+    Inventory => http://localhost:8080/inventory/product
+        /
+        1. post product with default data. [+]
+        10.Update product prices [+]
+
+        11.delete,get product by product name from inventory ***
+        
+        3.Get the inventory details [+]   get all product
+            5. => 3
+            8. => 3
+
+        /purchase
+        2.update product to inventory => purchase [+]  also update in transaction Entity with transaction entity
+         - accepts [array of product]
+
+        /sale
+        4.Update the inventory =>sale [+] also update in transaction Entity
+          - accepts [name,quantity]             
+            7. => 4
+            6. => 4
+        
+    Transaction => http://localhost:8080/inventory/transaction
+        9. => Get transaction details [+]
