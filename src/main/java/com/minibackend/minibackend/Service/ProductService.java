@@ -73,7 +73,7 @@ public class ProductService {
             Product productStock = productRepository.findByName(soldProduct.getName());
             productStock.setQuantity(productStock.getQuantity() - soldProduct.getQuantity());
             productRepository.save(productStock);
-            
+
             soldProduct.setId(productStock.getId());
             soldProduct.setCategory(productStock.getCategory());
         }

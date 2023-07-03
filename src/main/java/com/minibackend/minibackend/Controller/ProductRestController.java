@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -14,32 +15,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.minibackend.minibackend.DTO.ProductDto;
 import com.minibackend.minibackend.Entity.Product;
 import com.minibackend.minibackend.Entity.Transaction;
+import com.minibackend.minibackend.Service.DtoService;
 import com.minibackend.minibackend.Service.ProductService;
 import com.minibackend.minibackend.Service.TransactionService;
 import com.minibackend.minibackend.utils.OrderTypes;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("api/inventory")
+@Validated
 public class ProductRestController {
     @Autowired
     ProductService productService;
     @Autowired
     private TransactionService transactionService;
+    @Autowired
+    private DtoService dtoService;
 
     // ======================================================
     @PostMapping("/product")
-    public ResponseEntity<Product> add(@RequestBody Product product) {
-        System.out.println("Adding items");
-        productService.add(product);
-        return ResponseEntity.ok().body(product);
+    public ResponseEntity<Product> add(@Valid @RequestBody Product product) {
+        Product addedProduct = productService.add(product);
+        return ResponseEntity.ok().body(addedProduct);
     }
 
     @PatchMapping("/product")
     public Product updatePrice(@RequestBody Product product) {
-        productService.updatePrice(product.getName(), product.getPrice());
-        return productService.get(product.getName());
+        Product updatedProduct = productService.updatePrice(product.getName(), product.getPrice());
+        return productService.get(updatedProduct.getName());
 
     }
 
@@ -57,7 +64,8 @@ public class ProductRestController {
     // ======================================================
 
     @PutMapping("/product/purchase")
-    public Product purchase(@RequestBody Product product) {
+    public Product purchase(@Valid @RequestBody ProductDto productDto) {
+        Product product = dtoService.dtoToProduct(productDto);
         // Make purchase
         Product purchasedProduct = productService.purchase(product);
 
@@ -71,8 +79,10 @@ public class ProductRestController {
     }
 
     @PutMapping("/product/sale")
-    public Transaction sale(@RequestBody List<Product> products) {
-
+    public Transaction sale(@Valid @RequestBody List<ProductDto> productDtos) {
+        List<Product> products = productDtos.stream()
+                .map(product -> dtoService.dtoToProduct(product))
+                .toList();
         // Make the sale
         List<Product> res = productService.sale(products);
 

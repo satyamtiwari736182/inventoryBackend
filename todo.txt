@@ -7,9 +7,7 @@ Entity:
         - quantity
     Transaction
         - id
-        - name[]
-        - price[]
-        - quantity[]
+        - List<Product>
         - category (enum){sale, purchase}
 
 Product Services: 
