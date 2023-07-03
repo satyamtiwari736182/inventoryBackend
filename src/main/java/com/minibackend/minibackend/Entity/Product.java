@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.minibackend.minibackend.utils.ProductTypes;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +24,8 @@ import lombok.ToString;
 public class Product {
     @Id
     private String id;
+    @NotEmpty(message = "Name is required")
+    @Size(min = 3)
     private String name;
     @Builder.Default
     private int quantity = 0;

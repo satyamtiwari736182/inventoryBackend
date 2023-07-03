@@ -18,10 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.minibackend.minibackend.DTO.ProductDto;
 import com.minibackend.minibackend.Entity.Product;
 import com.minibackend.minibackend.Entity.Transaction;
-import com.minibackend.minibackend.Service.DtoService;
 import com.minibackend.minibackend.Service.ProductService;
 import com.minibackend.minibackend.Service.TransactionService;
-import com.minibackend.minibackend.utils.OrderTypes;
+import com.minibackend.minibackend.utils.ProductUtilityService;
 
 import jakarta.validation.Valid;
 
@@ -34,7 +33,7 @@ public class ProductRestController {
     @Autowired
     private TransactionService transactionService;
     @Autowired
-    private DtoService dtoService;
+    private ProductUtilityService productUtilityService;
 
     // ======================================================
     @PostMapping("/product")
@@ -44,72 +43,58 @@ public class ProductRestController {
     }
 
     @PatchMapping("/product")
-    public Product updatePrice(@RequestBody Product product) {
+    public ResponseEntity<Product> updatePrice(@RequestBody Product product) {
         Product updatedProduct = productService.updatePrice(product.getName(), product.getPrice());
-        return productService.get(updatedProduct.getName());
-
+        return ResponseEntity.ok().body(updatedProduct);
     }
 
     // !------------------------------------------------------
     @GetMapping("/product/{name}")
-    public Product getProducts(@PathVariable String name) {
-        return productService.get(name);
+    public ResponseEntity<Product> getProducts(@PathVariable String name) {
+        Product product = productService.get(name);
+        return ResponseEntity.ok().body(product);
     }
 
     @DeleteMapping("/product/{name}")
-    public Product removeProduct(@PathVariable String name) {
-        return productService.remove(name);
+    public ResponseEntity<Product> removeProduct(@PathVariable String name) {
+        Product product = productService.remove(name);
+        return ResponseEntity.ok().body(product);
     }
 
     // ======================================================
 
     @PutMapping("/product/purchase")
-    public Product purchase(@Valid @RequestBody ProductDto productDto) {
-        Product product = dtoService.dtoToProduct(productDto);
-        // Make purchase
-        Product purchasedProduct = productService.purchase(product);
-
-        Transaction transaction = Transaction.builder().products(List.of(purchasedProduct))
-                .category(OrderTypes.PURCHASE)
-                .build();
-        // update the transaction
-        transactionService.add(transaction);
-        return purchasedProduct;
-
+    public ResponseEntity<List<Product>> purchase(@Valid @RequestBody List<ProductDto> productDtos) {
+        List<Product> products = productUtilityService.validateProduct(productDtos, false);
+        products = productService.purchase(products);
+        return ResponseEntity.ok().body(products);
     }
 
     @PutMapping("/product/sale")
-    public Transaction sale(@Valid @RequestBody List<ProductDto> productDtos) {
-        List<Product> products = productDtos.stream()
-                .map(product -> dtoService.dtoToProduct(product))
-                .toList();
-        // Make the sale
-        List<Product> res = productService.sale(products);
+    public ResponseEntity<List<Product>> sale(@Valid @RequestBody List<ProductDto> productDtos) {
+        List<Product> products = productUtilityService.validateProduct(productDtos, true);
 
-        Transaction transaction = Transaction.builder()
-                .products(res)
-                .category(OrderTypes.SALE)
-                .build();
-
-        // update the transaction
-        transactionService.add(transaction);
-
-        return transaction;
+        products = productService.sale(products);
+        return ResponseEntity.ok().body(products);
     }
 
     // ======================================================
 
     @GetMapping
-    public List<Product> get() {
-        return productService.get();
+    public ResponseEntity<List<Product>> get() {
+        List<Product> products = productService.get();
+        return ResponseEntity.ok().body(products);
     }
 
-    // @GetMapping("/transaction")
-    // public int getTransaction() {
-    // return transactionService.get().size();
-    // }
+    @GetMapping("/transactionCount")
+    public ResponseEntity<Integer> getTransactionCount() {
+        int totalTransactionCount = transactionService.get().size();
+        return ResponseEntity.ok().body(totalTransactionCount);
+    }
+
     @GetMapping("/transaction")
-    public List<Transaction> getTransaction() {
-        return transactionService.get();
+    public ResponseEntity<List<Transaction>> getTransactions() {
+        List<Transaction> transactions = transactionService.get();
+        return ResponseEntity.ok().body(transactions);
     }
 }

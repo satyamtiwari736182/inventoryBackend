@@ -1,4 +1,4 @@
-package com.minibackend.minibackend.Service;
+package com.minibackend.minibackend.utils;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
