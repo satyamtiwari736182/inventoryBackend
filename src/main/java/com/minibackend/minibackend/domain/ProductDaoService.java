@@ -1,13 +1,13 @@
-package com.minibackend.minibackend.utils;
+package com.minibackend.minibackend.domain;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.minibackend.minibackend.DAO.ProductRepository;
-import com.minibackend.minibackend.Entity.Product;
-import com.minibackend.minibackend.Error.Exception.ProductNotFoundException;
+import com.minibackend.minibackend.domain.entity.Product;
+import com.minibackend.minibackend.domain.repo.ProductRepository;
+import com.minibackend.minibackend.error.exception.ProductNotFoundException;
 
 @Service
 public class ProductDaoService {

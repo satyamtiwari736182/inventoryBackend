@@ -1,12 +1,12 @@
-package com.minibackend.minibackend.Service;
+package com.minibackend.minibackend.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.minibackend.minibackend.Entity.Product;
-import com.minibackend.minibackend.utils.ProductDaoService;
+import com.minibackend.minibackend.domain.ProductDaoService;
+import com.minibackend.minibackend.domain.entity.Product;
 import com.minibackend.minibackend.utils.ProductUtilityService;
 
 @Service

@@ -1,9 +1,9 @@
-package com.minibackend.minibackend.Entity;
+package com.minibackend.minibackend.domain.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.minibackend.minibackend.utils.ProductTypes;
+import com.minibackend.minibackend.domain.enums.ProductTypes;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

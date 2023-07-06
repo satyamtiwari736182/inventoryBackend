@@ -1,4 +1,4 @@
-package com.minibackend.minibackend.DTO;
+package com.minibackend.minibackend.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;

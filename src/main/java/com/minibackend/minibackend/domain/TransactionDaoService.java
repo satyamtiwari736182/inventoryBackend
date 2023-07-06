@@ -1,12 +1,12 @@
-package com.minibackend.minibackend.utils;
+package com.minibackend.minibackend.domain;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.minibackend.minibackend.DAO.TransactionRepository;
-import com.minibackend.minibackend.Entity.Transaction;
+import com.minibackend.minibackend.domain.entity.Transaction;
+import com.minibackend.minibackend.domain.repo.TransactionRepository;
 
 @Service
 public class TransactionDaoService {

@@ -1,12 +1,12 @@
-package com.minibackend.minibackend.Error;
+package com.minibackend.minibackend.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.minibackend.minibackend.Error.Exception.ProductNotFoundException;
-import com.minibackend.minibackend.Error.Exception.ProductOutOfStockException;
+import com.minibackend.minibackend.error.exception.ProductNotFoundException;
+import com.minibackend.minibackend.error.exception.ProductOutOfStockException;
 
 @ControllerAdvice
 public class ExceptionHandlers {

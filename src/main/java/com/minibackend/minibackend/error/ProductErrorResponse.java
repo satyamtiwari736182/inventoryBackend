@@ -1,4 +1,4 @@
-package com.minibackend.minibackend.Error;
+package com.minibackend.minibackend.error;
 
 import org.springframework.stereotype.Component;
 

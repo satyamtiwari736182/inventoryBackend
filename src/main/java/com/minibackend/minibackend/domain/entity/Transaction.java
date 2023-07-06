@@ -1,11 +1,11 @@
-package com.minibackend.minibackend.Entity;
+package com.minibackend.minibackend.domain.entity;
 
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.minibackend.minibackend.utils.OrderTypes;
+import com.minibackend.minibackend.domain.enums.OrderTypes;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

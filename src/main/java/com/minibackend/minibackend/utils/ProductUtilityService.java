@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.minibackend.minibackend.DAO.ProductRepository;
-import com.minibackend.minibackend.DTO.ProductDto;
-import com.minibackend.minibackend.Entity.Product;
-import com.minibackend.minibackend.Error.Exception.ProductNotFoundException;
-import com.minibackend.minibackend.Error.Exception.ProductOutOfStockException;
+import com.minibackend.minibackend.domain.entity.Product;
+import com.minibackend.minibackend.domain.mapper.DtoService;
+import com.minibackend.minibackend.domain.repo.ProductRepository;
+import com.minibackend.minibackend.dto.ProductDto;
+import com.minibackend.minibackend.error.exception.ProductNotFoundException;
+import com.minibackend.minibackend.error.exception.ProductOutOfStockException;
 
 @Service
 public class ProductUtilityService {
@@ -23,7 +24,7 @@ public class ProductUtilityService {
         List<Product> products = productDtos.stream().map(productDto -> {
             Product product = dtoService.dtoToProduct(productDto);
             Product inventoryProduct = productRepository.findByName(product.getName());
-            
+
             if (inventoryProduct == null)
                 throw new ProductNotFoundException("invalid product");
 

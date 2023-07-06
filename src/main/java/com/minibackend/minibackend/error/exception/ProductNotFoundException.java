@@ -1,4 +1,4 @@
-package com.minibackend.minibackend.Error.Exception;
+package com.minibackend.minibackend.error.exception;
 
 public class ProductNotFoundException extends RuntimeException {
 

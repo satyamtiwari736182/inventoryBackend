@@ -1,4 +1,4 @@
-package com.minibackend.minibackend.Controller;
+package com.minibackend.minibackend.controller;
 
 import java.util.List;
 
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.minibackend.minibackend.DTO.ProductDto;
-import com.minibackend.minibackend.Entity.Product;
-import com.minibackend.minibackend.Entity.Transaction;
-import com.minibackend.minibackend.Service.ProductService;
-import com.minibackend.minibackend.Service.TransactionService;
+import com.minibackend.minibackend.domain.entity.Product;
+import com.minibackend.minibackend.domain.entity.Transaction;
+import com.minibackend.minibackend.dto.ProductDto;
+import com.minibackend.minibackend.service.ProductService;
+import com.minibackend.minibackend.service.TransactionService;
 import com.minibackend.minibackend.utils.ProductUtilityService;
 
 import jakarta.validation.Valid;

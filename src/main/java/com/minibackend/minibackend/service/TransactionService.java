@@ -1,14 +1,14 @@
-package com.minibackend.minibackend.Service;
+package com.minibackend.minibackend.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.minibackend.minibackend.Entity.Product;
-import com.minibackend.minibackend.Entity.Transaction;
-import com.minibackend.minibackend.utils.OrderTypes;
-import com.minibackend.minibackend.utils.TransactionDaoService;
+import com.minibackend.minibackend.domain.TransactionDaoService;
+import com.minibackend.minibackend.domain.entity.Product;
+import com.minibackend.minibackend.domain.entity.Transaction;
+import com.minibackend.minibackend.domain.enums.OrderTypes;
 
 @Service
 public class TransactionService {
